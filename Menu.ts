@@ -1,8 +1,16 @@
 import readlinesync = require("readline-sync");
+import { Camisa } from "./src/model/Camisa";
 
 export function Menu() {
 
     let opcao: number;
+
+    const c1 = new Camisa("1","Camisa Regata", 49.90, "Camisa na cor Verde Feminina", "P")
+
+    const c2 = new Camisa("2","Camisa Meia Longa", 79.90, "Camisa na cor Branca Feminina", "G")
+
+    c1.visualizar();
+    c2.visualizar();
 
     while(true) {
 
