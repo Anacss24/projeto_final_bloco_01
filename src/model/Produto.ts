@@ -1,12 +1,12 @@
 export abstract class Produto {
 
-    private _id: string;
+    private _id: number;
     private _nome: string;
     private _preco: number;
     private _descricao: string;
 
 
-	constructor(id: string, nome: string, preco: number, descricao: string) {
+	constructor(id: number, nome: string, preco: number, descricao: string) {
 		this._id = id;
 		this._nome = nome;
 		this._preco = preco;
@@ -17,7 +17,7 @@ export abstract class Produto {
      * Getter id
      * @return {string }
      */
-	public get id(): string  {
+	public get id(): number {
 		return this._id;
 	}
 
@@ -49,7 +49,7 @@ export abstract class Produto {
      * Setter id
      * @param {string} value
      */
-	public set id(value: string ) {
+	public set id(value: number ) {
 		this._id = value;
 	}
 

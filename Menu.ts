@@ -1,16 +1,13 @@
 import readlinesync = require("readline-sync");
-import { Camisa } from "./src/model/Camisa";
+import { Roupa } from "./src/model/Roupa";
+import { ProdutoController } from "./src/controller/ProdutoController";
 
 export function Menu() {
 
-    let opcao: number;
+    let opcao, preco, numero: number;
+    let nome, descricao, tamanho: string;
 
-    const c1 = new Camisa("1","Camisa Regata", 49.90, "Camisa na cor Verde Feminina", "P")
-
-    const c2 = new Camisa("2","Camisa Meia Longa", 79.90, "Camisa na cor Branca Feminina", "G")
-
-    c1.visualizar();
-    c2.visualizar();
+    const produtoController: ProdutoController = new ProdutoController();
 
     while(true) {
 
@@ -24,7 +21,7 @@ export function Menu() {
         console.log("    2 - Listar Todos os Produtos      ");
         console.log("    3 - Listar Produto pelo ID        ");
         console.log("    4 - Atualizar o Produto           ");
-        console.log("    5 - Deletar 0 Produto             ");
+        console.log("    5 - Deletar o Produto             ");
         console.log("    6 - Sair                          ");
         console.log("                                      ");
         console.log("**************************************");
@@ -35,22 +32,74 @@ export function Menu() {
         switch(opcao){
             case 1:
                 console.log("\nCadastrar Produto")
+                
+                console.log("Digite o nome do Produto: ")
+                nome = readlinesync.question("");
+
+                console.log("Digite o preço do Produto: ")
+                preco = readlinesync.questionFloat("");
+
+                console.log("Digite a descrição do Produto: ")
+                descricao = readlinesync.question("");
+
+                console.log("Digite o tamanho do Produto: ")
+                tamanho = readlinesync.question("");
+
+                produtoController.cadastrar(new Roupa(produtoController.gerarId(), nome, preco, descricao,tamanho));
+
                 keyPress();
                 break;
             case 2:
                 console.log("\nListar todos os Produtos")
+
+                produtoController.listarTodos();
+
                 keyPress();
                 break;
             case 3:
-                console.log("\nListar Produto pelo ID ")
+                console.log("\nListar Produto pelo ID ");
+
+                console.log("Digite o ID do Produto: ");
+                numero = readlinesync.questionInt("");
+
+                produtoController.procurarPorId(numero);
                 keyPress();
                 break;
             case 4:
                 console.log("\nAtualizar o Produto")
+
+                console.log("Digite o ID do Produto: ")
+                numero = readlinesync.questionInt("")
+
+                let produto = produtoController.buscarNoArray(numero)
+
+                if(numero !== null){
+                    console.log("Digite o nome do Produto: ")
+                    nome = readlinesync.question("");
+    
+                    console.log("Digite o preço do Produto: ")
+                    preco = readlinesync.questionFloat("");
+    
+                    console.log("Digite a descrição do Produto: ")
+                    descricao = readlinesync.question("");
+    
+                    console.log("Digite o tamanho do Produto: ")
+                    tamanho = readlinesync.question("");
+                    
+                    produtoController.atualizar(new Roupa(numero, nome, preco, descricao, tamanho));
+
+                } else {
+                    console.log("\n O Produto não foi encontrado! ")
+                }
                 keyPress();
                 break;
             case 5:
                 console.log("\nDeletar o Produto")
+
+                console.log("Digite o ID do Produto: ")
+                numero = readlinesync.questionInt("")
+
+                produtoController.deletar(numero);
                 keyPress();
                 break;
 

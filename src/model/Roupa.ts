@@ -1,10 +1,10 @@
 import { Produto } from "./Produto";
 
- export class Camisa extends Produto {
+ export class Roupa extends Produto {
     private _tamanho: string;
 
-    constructor(id: string,nome: string, preco: number, descricao: string, tamanho: string){
-        super(id,nome, preco, descricao)
+    constructor(id: number, nome: string, preco: number, descricao: string, tamanho: string){
+        super(id, nome, preco, descricao)
         this._tamanho = tamanho;
     }
 
